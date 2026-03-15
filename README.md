@@ -13,11 +13,6 @@ O motor de análise embutido no projeto coleta e exibe em tempo real:
 * **Estados Avaliados:** Contagem de nós visitados na árvore de recursão.
 * **Mecanismo de Timeout:** Interrupção segura (fail-fast) configurada para 30 segundos para evitar travamentos em complexidades exponenciais, exibindo o status de falha de escalabilidade.
 
-## Algoritmos Implementados
-
-- [x] **Backtracking (Força Bruta):** Implementação base com complexidade de tempo $O(2^n)$. Explora todo o espaço de estados sem podas, demonstrando o gargalo computacional em strings maiores que 20 caracteres.
-- [ ] **Branch and Bound:** *(Em desenvolvimento)* Estratégia de otimização focada em podar caminhos subótimos na árvore de decisão para melhorar a eficiência da busca.
-
 ## Estrutura do Projeto
 O projeto foi construído utilizando padrões de projeto (como o *Strategy*) para facilitar a injeção de novos algoritmos sem alterar o motor de testes.
 
