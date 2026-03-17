@@ -4,7 +4,10 @@ import lcs.model.LCSResult;
 import lcs.reader.LCSReader;
 import lcs.strategy.LCSAlgorithm;
 import lcs.strategy.LCSBacktracking;
+import lcs.strategy.LCSBranchAndBound;
+
 import java.util.Scanner;
+
 
 public class Main {
 
@@ -30,8 +33,8 @@ public class Main {
             if (opcao == 1) {
                 executarAnalise(new LCSBacktracking(), arquivos, "Backtracking");
             } else if (opcao == 2) {
-                System.out.println("\n..."); 
-                // implementar a logica para o branch and bound
+            	executarAnalise(new LCSBranchAndBound(), arquivos, "Branch and Bound"); 
+                // logica para o branch and bound
 
             } else if (opcao != 3) {
                 System.out.println("\nOpção inválida! Tente novamente.");
