@@ -83,6 +83,8 @@ public class Main {
                 
                 if (algoritmo instanceof LCSBacktracking) {
                     System.out.println("Estados Avaliados: " + ((LCSBacktracking) algoritmo).getMetrics().getEstadosAvaliados());
+                } else if (algoritmo instanceof LCSBranchAndBound) {
+                    System.out.println("Estados Avaliados: " + ((LCSBranchAndBound) algoritmo).getMetrics().getEstadosAvaliados());
                 }
                 
                 System.out.println("--------------------------------------------------");
@@ -100,6 +102,8 @@ public class Main {
                     
                     if (algoritmo instanceof LCSBacktracking) {
                         System.out.println("Escalabilidade falhou após avaliar: " + ((LCSBacktracking) algoritmo).getMetrics().getEstadosAvaliados() + " estados.");
+                    } else if (algoritmo instanceof LCSBranchAndBound) {
+                        System.out.println("Escalabilidade falhou após avaliar: " + ((LCSBranchAndBound) algoritmo).getMetrics().getEstadosAvaliados() + " estados.");
                     }
                     System.out.println("--------------------------------------------------");
                 } else {
