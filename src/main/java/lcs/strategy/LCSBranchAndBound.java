@@ -56,31 +56,13 @@ public class LCSBranchAndBound  implements LCSAlgorithm{
 
         if (x.charAt(i) == y.charAt(j)) {
 
-            branchAndBound(
-                    x,
-                    y,
-                    i + 1,
-                    j + 1,
-                    current + x.charAt(i)
-            );
+            branchAndBound( x,y,i + 1, j + 1, current + x.charAt(i));
 
         } else {
 
-            branchAndBound(
-                    x,
-                    y,
-                    i + 1,
-                    j,
-                    current
-            );
+            branchAndBound( x, y,i + 1, j, current);
 
-            branchAndBound(
-                    x,
-                    y,
-                    i,
-                    j + 1,
-                    current
-            );
+            branchAndBound(x,y, i,j + 1,current);
         }
     }
 }
