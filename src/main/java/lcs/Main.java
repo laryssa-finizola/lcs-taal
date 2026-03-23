@@ -6,6 +6,7 @@ import lcs.strategy.LCSAlgorithm;
 import lcs.strategy.LCSBacktracking;
 import lcs.strategy.LCSBranchAndBound;
 import lcs.strategy.LCSDynamicProgramming;
+import lcs.strategy.LCSGreedy;
 
 import java.util.Scanner;
 
@@ -21,12 +22,14 @@ public class Main {
             "inputs/lcs_50_chars.txt"
         };
 
-        while (opcao != 4) {
+        while (opcao != 5) {
             System.out.println("\n=== COMPARATIVO LCS ===");
             System.out.println("1. Executar Backtracking");
             System.out.println("2. Executar Branch and Bound");
             System.out.println("3. Executar Programação Dinâmica");
-            System.out.println("4. Sair");
+            System.out.println("4. Executar Guloso");
+            System.out.println("5. Sair");
+
             System.out.print("Escolha uma opção: ");
             
             opcao = scanner.nextInt();
@@ -39,8 +42,11 @@ public class Main {
 
             } else if (opcao == 3) {
                 executarAnalise(new LCSDynamicProgramming(), arquivos, "Programação Dinâmica");
-
-            } else if (opcao != 4) {
+            } 
+            else if (opcao == 4) {
+                executarAnalise(new LCSGreedy(), arquivos, "Guloso");
+            }
+            else if (opcao != 5) {
                 System.out.println("\nOpção inválida! Tente novamente.");
             }
         }
@@ -115,6 +121,9 @@ public class Main {
 
                     } else if (algoritmo instanceof LCSDynamicProgramming) {
                         System.out.println("Escalabilidade falhou após avaliar: " + ((LCSDynamicProgramming) algoritmo).getMetrics().getEstadosAvaliados() + " estados.");
+                    }
+                    else if (algoritmo instanceof LCSGreedy) {
+                        System.out.println("Estados Avaliados: " + ((LCSGreedy) algoritmo).getMetrics().getEstadosAvaliados());
                     }
 
                     System.out.println("--------------------------------------------------");
