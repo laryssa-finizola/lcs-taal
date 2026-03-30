@@ -16,10 +16,22 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
 
-        String[] arquivos = {
+        // 1. Configurando os inputs para cada estratégia 
+        String[] arquivosBacktracking = {
+            "inputs/lcs_10_chars.txt",
+            "inputs/lcs_20_chars.txt"
+        };
+
+        String[] arquivosBranchAndBound = {
             "inputs/lcs_10_chars.txt",
             "inputs/lcs_20_chars.txt",
             "inputs/lcs_50_chars.txt"
+        };
+
+        String[] arquivosPdEGulosa = {
+            "inputs/lcs_100_chars.txt",
+            "inputs/lcs_1000_chars.txt",
+            "inputs/lcs_10000_chars.txt"
         };
 
         while (opcao != 5) {
@@ -27,26 +39,22 @@ public class Main {
             System.out.println("1. Executar Backtracking");
             System.out.println("2. Executar Branch and Bound");
             System.out.println("3. Executar Programação Dinâmica");
-            System.out.println("4. Executar Guloso");
+            System.out.println("4. Executar Estratégia Gulosa");
             System.out.println("5. Sair");
-
             System.out.print("Escolha uma opção: ");
             
             opcao = scanner.nextInt();
 
+            // 2. Passando o array correspondente para o método de análise
             if (opcao == 1) {
-                executarAnalise(new LCSBacktracking(), arquivos, "Backtracking");
-
+                executarAnalise(new LCSBacktracking(), arquivosBacktracking, "Backtracking");
             } else if (opcao == 2) {
-                executarAnalise(new LCSBranchAndBound(), arquivos, "Branch and Bound");
-
+                executarAnalise(new LCSBranchAndBound(), arquivosBranchAndBound, "Branch and Bound"); 
             } else if (opcao == 3) {
-                executarAnalise(new LCSDynamicProgramming(), arquivos, "Programação Dinâmica");
-            } 
-            else if (opcao == 4) {
-                executarAnalise(new LCSGreedy(), arquivos, "Guloso");
-            }
-            else if (opcao != 5) {
+                executarAnalise(new LCSDynamicProgramming(), arquivosPdEGulosa, "Programação Dinâmica"); 
+            } else if (opcao == 4) {
+                executarAnalise(new LCSGreedy(), arquivosPdEGulosa, "Estratégia Gulosa"); 
+            } else if (opcao != 5) {
                 System.out.println("\nOpção inválida! Tente novamente.");
             }
         }
@@ -86,18 +94,26 @@ public class Main {
                 
                 if (memoriaUsadaBytes < 0) memoriaUsadaBytes = 0; 
 
-                System.out.println(resultado.toString());
+                // Imprime a resposta omitindo o meio caso a string seja gigante
+                System.out.println("Comprimento da LCS: " + resultado.getLength());
+                if (resultado.getLcs().length() > 100) {
+                    System.out.println("LCS: " + resultado.getLcs().substring(0, 100) + "... [Omitido por ser muito longa]");
+                } else {
+                    System.out.println("LCS: " + resultado.getLcs());
+                }
+                
                 System.out.println("Tempo de Execução: " + tempoTotalMs + " ms");
                 System.out.println("Uso de Memória: " + (memoriaUsadaBytes / 1024) + " KB (" + (memoriaUsadaBytes / (1024 * 1024)) + " MB)");
                 
+                // Imprime as métricas de estado de forma padronizada
                 if (algoritmo instanceof LCSBacktracking) {
                     System.out.println("Estados Avaliados: " + ((LCSBacktracking) algoritmo).getMetrics().getEstadosAvaliados());
-
                 } else if (algoritmo instanceof LCSBranchAndBound) {
                     System.out.println("Estados Avaliados: " + ((LCSBranchAndBound) algoritmo).getMetrics().getEstadosAvaliados());
-
                 } else if (algoritmo instanceof LCSDynamicProgramming) {
-                    System.out.println("Estados Avaliados: " + ((LCSDynamicProgramming) algoritmo).getMetrics().getEstadosAvaliados());
+                    System.out.println("Estados Avaliados (Iterações na Matriz): " + ((LCSDynamicProgramming) algoritmo).getMetrics().getEstadosAvaliados());
+                } else if (algoritmo instanceof LCSGreedy) {
+                    System.out.println("Estados Avaliados (Avanços de Ponteiro): " + ((LCSGreedy) algoritmo).getMetrics().getEstadosAvaliados());
                 }
                 
                 System.out.println("--------------------------------------------------");
@@ -115,17 +131,11 @@ public class Main {
                     
                     if (algoritmo instanceof LCSBacktracking) {
                         System.out.println("Escalabilidade falhou após avaliar: " + ((LCSBacktracking) algoritmo).getMetrics().getEstadosAvaliados() + " estados.");
-
                     } else if (algoritmo instanceof LCSBranchAndBound) {
                         System.out.println("Escalabilidade falhou após avaliar: " + ((LCSBranchAndBound) algoritmo).getMetrics().getEstadosAvaliados() + " estados.");
-
                     } else if (algoritmo instanceof LCSDynamicProgramming) {
-                        System.out.println("Escalabilidade falhou após avaliar: " + ((LCSDynamicProgramming) algoritmo).getMetrics().getEstadosAvaliados() + " estados.");
+                        System.out.println("Escalabilidade falhou na iteração: " + ((LCSDynamicProgramming) algoritmo).getMetrics().getEstadosAvaliados());
                     }
-                    else if (algoritmo instanceof LCSGreedy) {
-                        System.out.println("Estados Avaliados: " + ((LCSGreedy) algoritmo).getMetrics().getEstadosAvaliados());
-                    }
-
                     System.out.println("--------------------------------------------------");
                 } else {
                     System.err.println("Erro de execução: " + e.getMessage());

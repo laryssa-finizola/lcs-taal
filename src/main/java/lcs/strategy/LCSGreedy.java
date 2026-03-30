@@ -25,20 +25,21 @@ public class LCSGreedy implements LCSAlgorithm {
         }
 
         StringBuilder lcs = new StringBuilder();
-
-        int j = 0; // ponteiro para y
+        int j = 0; 
 
         for (int i = 0; i < x.length(); i++) {
-
-            for (; j < y.length(); j++) {
-
+            
+            int buscaJ = j; 
+            
+            while (buscaJ < y.length()) {
                 metrics.registrarNovoEstado();
 
-                if (x.charAt(i) == y.charAt(j)) {
+                if (x.charAt(i) == y.charAt(buscaJ)) {
                     lcs.append(x.charAt(i));
-                    j++; // avança em y
+                    j = buscaJ + 1; 
                     break;
                 }
+                buscaJ++; 
             }
         }
 
