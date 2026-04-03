@@ -44,10 +44,10 @@ Este projeto foi estruturado utilizando o **Maven** para a gestão de dependênc
    * **No Eclipse:** Vá a `File > Import > Maven > Existing Maven Projects` e selecione a pasta clonada.
    * **No IntelliJ:** Vá a `File > Open` e selecione o ficheiro `pom.xml`.
 
-3. **Execute o Benchmark (Consola):**
+3. **Execute o Benchmark :**
    * Navegue até ao ficheiro principal localizado em: `src/main/java/lcs/Main.java`.
    * Clique com o botão direito no ficheiro e selecione **Run As > Java Application**.
-   * O menu interativo aparecerá na consola da IDE. Basta digitar a opção desejada (`1` para Backtracking, `2` para Branch and Bound ou `3` para Sair) e pressionar `Enter`.
+   * O menu interativo aparecerá na IDE. Basta digitar a opção desejada (`1` para Backtracking, `2` para Branch and Bound ou `3` para Sair) e pressionar `Enter`.
   
 ###  Execução de Testes Unitários (JUnit)
 
